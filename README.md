@@ -159,7 +159,7 @@ PyCharm 运行 `app.py`（或命令行 `python app.py`），浏览器打开 http
 - 推理同样保留采样随机性，多次鉴定同一张图结果可能不完全一致；
 - 服务启动时后台预加载模型（约 1~2 分钟），期间 `GET /api/status` 返回 `ready: false`，前端思考页会显示"正在唤醒模型"提示。
 
-## 显存充足
+## 如果显存充足
 
 `config1.py` ~ `test1.py` 专为 24GB 显存服务器设计，运行方式与本机版完全相同（`train1.py` / `test1.py`，`test1.py` 顶部改 `TEST_IMAGE_PATH`）。两套代码的唯一行为分界是配置文件：
 
@@ -198,5 +198,8 @@ train 与 val 的 gap 从 epoch 4 起逐步拉大，同样指向过拟合；本�
 
 ## 演示与分析
 
+在人工测试分析时，使用inputs里的6张图测试：
+
+![example](inputs/example.png) ![test1](inputs/test1.png) ![test2](inputs/test2.png) ![test3](inputs/test3.png) ![test4](inputs/test4.png) ![test5](inputs/test5.png)
 
 
