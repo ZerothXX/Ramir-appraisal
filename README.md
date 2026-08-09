@@ -173,7 +173,9 @@ PyCharm 中右键运行 `app.py`（或命令行 `python app.py`），浏览器�
 | LoRA 配置 | r=16，α=32，dropout 0.05 |
 
 损失曲线：
+
 <img src="outputs/curve/loss_per_epoch.png" width="600" height="375">
+
 训练 loss 收敛良好且无震荡，说明梯度累积 + bf16 + 掩码策略工作正常，数据链路（含视觉侧梯度修复后）完整。
 验证 loss 在 epoch 4 达到最低 0.731，之后缓慢回升至 0.877——典型的过拟合信号：108 张的小数据集 + 10 epoch，模型开始"死记"训练样本细节（如具体图像背景）而非泛化类型语义。
 train 与 val 的 gap 从 epoch 4 起逐步拉大，同样指向过拟合；本机 512 分辨率进一步加剧了这一效应（细节不足时模型更依赖记忆）。
