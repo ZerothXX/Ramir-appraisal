@@ -5,8 +5,9 @@
 开发方式为规格驱动 + 多 Agent 协作开发，代码可直接在 PyCharm 中运行调试。
 
 ## 背景
-项目起源我们非常经典的对话：fairy帮忙寻找拉米尔的这一段
-<img src="show/chat.png" width="600"> 
+项目起源我们非常经典的对话：fairy帮忙寻找拉米尔的这一段。所以设计了这个比较简陋的项目。
+
+<img src="show/chat.png" width="450"> 
 
 ## 核心特性
 
@@ -94,7 +95,7 @@ pip install torch transformers peft pillow matplotlib numpy tqdm
 
 版本以本机环境为准（torch 2.2.1 / transformers 4.51.3 / peft 0.17.1，如用 pip 装 torch 请按官网匹配 CUDA 版本）。
 
-**数据放置**：按上面的 dataset(https://huggingface.co/datasets/ZerothX/Ramir_appraisal/tree/main) 结构放好，每个图片文件夹对应一个同名 JSON（如 `imgs1/` 对应 `descriptions/imgs1.json`），格式：
+**数据放置**：按上面的 dataset[数据集](https://huggingface.co/datasets/ZerothX/Ramir_appraisal/tree/main "点击访问线上地址") 结构放好，每个图片文件夹对应一个同名 JSON（如 `imgs1/` 对应 `descriptions/imgs1.json`），数据集一些标签需要人工写，所以本人只写了4个闭集2个开集108张图的数据，比较简陋，格式：
 
 ```json
 [
@@ -140,7 +141,7 @@ PyCharm 运行 `app.py`（或命令行 `python app.py`），浏览器打开 http
 
 前端设计参考使用我们超级管家助手fairy的大眼睛。
 1. **封面页**：以 fairy眼睛为主视觉，蓝→浅蓝放射渐变背景，点"进入鉴定 →"进入选图页；
-   <img src="show/web1.png" width="350"> 
+   <img src="show/web1.png" width="350">
 3. **选图页**：点击或拖拽本地图片（前端自动压缩后上传），点"开始鉴定"跳转思考页；
    <img src="show/web2.png" width="350"> <img src="show/web3.png" width="350"> 
 5. **思考页**：眼睛图标呼吸 + 涟漪动画，同时调用后端 `POST /api/predict` 推理（复用 `test.py` 的 `predict_image` 管线，模型全局单例只加载一次，首次请求会自动后台预热）；
