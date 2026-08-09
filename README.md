@@ -201,36 +201,29 @@ train 与 val 的 gap 从 epoch 4 起逐步拉大，同样指向过拟合；本�
 在人工测试分析时，使用inputs里的6张图测试：
 
 <div align="center" style="display:flex; justify-content:center; gap:20px;">
-
   <figure>
-    <img src="inputs/example.png" width="150">
+    <img src="inputs/example.png" width="100">
     <figcaption align="center">图1</figcaption>
   </figure>
-
   <figure>
-    <img src="inputs/test1.png" width="150">
+    <img src="inputs/test1.png" width="100">
     <figcaption align="center">图2</figcaption>
   </figure>
-
   <figure>
-    <img src="inputs/test2.png" width="150">
+    <img src="inputs/test2.png" width="100">
     <figcaption align="center">图3</figcaption>
   </figure>
-
   <figure>
-    <img src="inputs/test3.png" width="150">
+    <img src="inputs/test3.png" width="100">
     <figcaption align="center">图4</figcaption>
   </figure>
-
   <figure>
-    <img src="inputs/test4.png" width="150">
+    <img src="inputs/test4.png" width="100">
     <figcaption align="center">图5</figcaption>
   </figure>
-
   <figure>
-    <img src="inputs/test5.png" width="150">
+    <img src="inputs/test5.png" width="100">
     <figcaption align="center">图6</figcaption>
   </figure>
-
 </div>
 
