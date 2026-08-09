@@ -2,7 +2,7 @@
 
 基于 Qwen2.5-VL-3B-Instruct 的 LoRA 轻量微调项目：输入一张动漫图片，VLM 整体判断图中是否存在粉毛角色；存在则对每个粉毛角色输出"结论：xxx型拉米尔 + 分析：判断依据"的结构化文本，不存在则输出"未识别到粉毛角色"。
 
-开发方式为规格驱动（`docs/requirements.md`）+ 多 Agent 协作开发，代码可直接在 PyCharm 中运行调试。
+开发方式为规格驱动 + 多 Agent 协作开发，代码可直接在 PyCharm 中运行调试。
 
 ## 核心特性
 
@@ -90,7 +90,7 @@ pip install torch transformers peft pillow matplotlib numpy tqdm
 
 版本以本机环境为准（torch 2.2.1 / transformers 4.51.3 / peft 0.17.1，如用 pip 装 torch 请按官网匹配 CUDA 版本）。
 
-**数据放置**：按上面的 dataset 结构放好，每个图片文件夹对应一个同名 JSON（如 `imgs1/` 对应 `descriptions/imgs1.json`），格式：
+**数据放置**：按上面的 dataset(https://huggingface.co/datasets/ZerothX/Ramir_appraisal/tree/main) 结构放好，每个图片文件夹对应一个同名 JSON（如 `imgs1/` 对应 `descriptions/imgs1.json`），格式：
 
 ```json
 [
@@ -171,6 +171,12 @@ PyCharm 中右键运行 `app.py`（或命令行 `python app.py`），浏览器�
 | Val loss | 最低 0.731（epoch 4），后回升至 0.877（epoch 10） |
 | 可训练参数 | 11,304,960（占全模型 0.30%） |
 | LoRA 配置 | r=16，α=32，dropout 0.05 |
+
+损失曲线：
+![损失曲线](outputs/curve/loss_per_epoch.png)
+训练 loss 收敛良好且无震荡，说明梯度累积 + bf16 + 掩码策略工作正常，数据链路（含视觉侧梯度修复后）完整。
+验证 loss 在 epoch 4 达到最低 0.731，之后缓慢回升至 0.877——典型的过拟合信号：108 张的小数据集 + 10 epoch，模型开始"死记"训练样本细节（如具体图像背景）而非泛化类型语义。
+train 与 val 的 gap 从 epoch 4 起逐步拉大，同样指向过拟合；本机 512 分辨率进一步加剧了这一效应（细节不足时模型更依赖记忆）。
 
 说明：小数据（108 样本）训练下验证 loss 自 epoch 4 起回升，属正常过拟合；512 分辨率下服饰/配饰等细节信息受限，推理质量有损。建议在 4090 服务器以 2048 分辨率、更大 LoRA 容量重训。
 
