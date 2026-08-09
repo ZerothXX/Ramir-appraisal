@@ -141,12 +141,16 @@ PyCharm 运行 `app.py`（或命令行 `python app.py`），浏览器打开 http
 
 前端设计参考使用我们超级管家助手fairy的大眼睛。
 1. **封面页**：以 fairy眼睛为主视觉，蓝→浅蓝放射渐变背景，点"进入鉴定 →"进入选图页；
+   
    <img src="show/web1.png" width="350">
 3. **选图页**：点击或拖拽本地图片（前端自动压缩后上传），点"开始鉴定"跳转思考页；
+   
    <img src="show/web2.png" width="350"> <img src="show/web3.png" width="350"> 
 5. **思考页**：眼睛图标呼吸 + 涟漪动画，同时调用后端 `POST /api/predict` 推理（复用 `test.py` 的 `predict_image` 管线，模型全局单例只加载一次，首次请求会自动后台预热）；
+   
    <img src="show/web4.png" width="350"> 
 7. **结果页**：展示原图与鉴定结果（结论 / 分析分行渲染）。
+   
    <img src="show/web5.png" width="350"> 
 
 说明：
